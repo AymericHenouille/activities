@@ -121,4 +121,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
       - name: '🔥 Deploy to Firebase'
-        run: npm run deploy:ci -- --token=${{ secrets.FIREBASE_TOKEN }}
+        run: npm run deploy:hosting -- --token=${{ secrets.FIREBASE_TOKEN }}
