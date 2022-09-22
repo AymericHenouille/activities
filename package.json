@@ -8,7 +8,9 @@
     "test": "ng test",
     "test:ci": "npm run test -- --watch=false --browsers=ChromeHeadlessCI",
     "lint": "echo lint not enabled",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "deploy:hosting": "firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +25,7 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@compodoc/compodoc": "^1.1.19",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
