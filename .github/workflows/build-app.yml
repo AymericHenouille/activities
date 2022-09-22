@@ -1,0 +1,68 @@
+name: 'Build Angular app'
+on: push
+jobs:
+  install_dependencies:
+    name: '🔨 Install dependencies'
+    runs-on: ubuntu-latest
+    steps:
+      - name: '📥 Checkout repository'
+        uses: actions/checkout@v3
+      - name: '📩 Cache dependencies'
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: '📦 Install dependencies'
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+  lint:
+    name: '🔍 Lint project'
+    runs-on: ubuntu-latest
+    needs: [install_dependencies]
+    steps:
+      - name: '📥 Checkout repository'
+        uses: actions/checkout@v3
+      - name: '📩 Cache dependencies'
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: '🔍 Lint project'
+        run: npm run lint
+  test:
+    name: '🧪 Run tests'
+    runs-on: ubuntu-latest
+    needs: [install_dependencies]
+    steps:
+      - name: '📥 Checkout repository'
+        uses: actions/checkout@v3
+      - name: '📩 Cache dependencies'
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: '🧪 Run tests'
+        run: npm run test:ci
+  build:
+    name: '🏗️ Build project'
+    runs-on: ubuntu-latest
+    needs: [install_dependencies]
+    steps:
+      - name: '📥 Checkout repository'
+        uses: actions/checkout@v3
+      - name: '📩 Cache dependencies'
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: '🏗️ Build project'
+        run: npm run build
+
