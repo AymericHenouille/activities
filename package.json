@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
+    "test:ci": "npm run test -- --watch=false --browsers=ChromeHeadlessCI",
     "lint": "echo lint not enabled",
     "watch": "ng build --watch --configuration development"
   },
