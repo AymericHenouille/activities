@@ -1,4 +1,4 @@
-import { isDevMode, ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
@@ -11,7 +11,7 @@ const MODULES: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
 ];
 
 function useValue(port: number): [string, number] | undefined {
-  return isDevMode() ? ['localhost', port] : undefined;
+  return !environment.production ? ['localhost', port] : undefined;
 }
 
 @NgModule({
