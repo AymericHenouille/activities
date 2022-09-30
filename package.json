@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "emulator": "firebase emulators:start",
+    "start": "concurrently -n Emulators,Angular -c yellow,bold \"npm run watch:function | npm run emulators\" \"ng serve\"",
     "build": "ng build --configuration production",
     "test": "ng test",
     "test:ci": "npm run test -- --watch=false --browsers=ChromeHeadlessCI",
@@ -35,6 +36,7 @@
     "@angular/cli": "~14.2.3",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
+    "concurrently": "^7.4.0",
     "firebase-tools": "^11.9.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",

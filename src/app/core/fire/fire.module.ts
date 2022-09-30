@@ -1,13 +1,14 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { AngularFireModule } from '@angular/fire/compat';
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
-import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
+import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/compat/functions';
 import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 
 const MODULES: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
-  provideFirebaseApp(() => initializeApp(environment.firebase)),
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFirestoreModule
 ];
 
 function useValue(port: number): [string, number] | undefined {

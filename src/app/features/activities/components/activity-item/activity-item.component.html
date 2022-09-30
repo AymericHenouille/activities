@@ -1,1 +1,6 @@
-<p>activity-item works!</p>
+<mat-card>
+  <img mat-card-image [src]="item.banner" [alt]="item.name">
+  <mat-card-content>
+    <mat-card-title>{{ item.name }}</mat-card-title>
+  </mat-card-content>
+</mat-card>
