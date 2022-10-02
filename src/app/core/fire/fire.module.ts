@@ -1,28 +1,32 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
-import { AngularFireModule } from '@angular/fire/compat';
-import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
-import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/compat/functions';
-import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
+import { connectFirestoreEmulator, enableIndexedDbPersistence, Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { connectStorageEmulator, FirebaseStorage, getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 const MODULES: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
-  AngularFireModule.initializeApp(environment.firebase),
-  AngularFirestoreModule
+  provideFirebaseApp(() => initializeApp(environment.firebase)),
+  provideFirestore(() => {
+    const firestore: Firestore = getFirestore();
+    connectFirestoreEmulator(firestore, 'localhost', 8080);
+    enableIndexedDbPersistence(firestore);
+    return firestore;
+  }),
+  provideStorage(() => {
+    const storage: FirebaseStorage = getStorage();
+    connectStorageEmulator(storage, 'localhost', 9199);
+    return storage;
+  }),
+  provideAuth(() => {
+    const auth = getAuth();
+    connectAuthEmulator(auth, 'http://localhost:9099');
+    return auth;
+  }),
 ];
-
-function useValue(port: number): [string, number] | undefined {
-  return !environment.production ? ['localhost', port] : undefined;
-}
 
 @NgModule({
   imports: [MODULES],
-  exports: [MODULES],
-  providers: [
-    { provide: USE_AUTH_EMULATOR, useValue: useValue(9099) },
-    { provide: USE_FIRESTORE_EMULATOR, useValue: useValue(8080) },
-    { provide: USE_FUNCTIONS_EMULATOR, useValue: useValue(5001) },
-    { provide: USE_STORAGE_EMULATOR, useValue: useValue(9199) },
-  ]
+  exports: [MODULES]
 })
 export class FireModule { }

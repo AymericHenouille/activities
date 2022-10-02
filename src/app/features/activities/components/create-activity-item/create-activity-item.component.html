@@ -1,1 +1,12 @@
-<p>create-activity-item works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Create</button>
+</form>

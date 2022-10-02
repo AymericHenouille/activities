@@ -1,4 +1,4 @@
 <app-activity-item *ngFor="let item of items" [item]="item"></app-activity-item>
-<app-add-button>
+<button mat-fab (click)="createItem()">
   <mat-icon>add</mat-icon>
-</app-add-button>
+</button>

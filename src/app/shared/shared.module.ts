@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
-import { AddButtonComponent } from './components/add-button/add-button.component';
 import { MaterialModule } from './material/material.module';
 
 const MODULES: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
@@ -9,7 +8,7 @@ const MODULES: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
 ];
 
 const COMPONENTS: Type<unknown>[] = [
-  AddButtonComponent
+
 ];
 
 @NgModule({

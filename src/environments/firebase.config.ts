@@ -9,4 +9,4 @@ export const FIREBASE_CONFIGURATION_PROD: FirebaseOptions = {
   appId: '1:960038294460:web:fcdb4192b1fdda78d851b9'
 };
 
-export const FIREBASE_CONFIGURATION_DEV: FirebaseOptions = { };
+export const FIREBASE_CONFIGURATION_DEV: FirebaseOptions = FIREBASE_CONFIGURATION_PROD;

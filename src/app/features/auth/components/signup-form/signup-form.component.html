@@ -1,0 +1,30 @@
+<app-form-frame title="create a new account" [loading]="loading">
+  <form content [formGroup]="form" (ngSubmit)="signup()">
+    <mat-form-field>
+      <input matInput type="email" placeholder="Email" formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" />
+      <button type="button" matSuffix mat-icon-button (click)="showPassword = !showPassword">
+        <mat-icon>{{ visibility(showPassword) }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password" formControlName="confirmPassword" />
+      <button type="button" matSuffix mat-icon-button (click)="showConfirmPassword = !showConfirmPassword">
+        <mat-icon>{{ visibility(showConfirmPassword) }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <p *ngIf="errorMessage" color="warn">{{ errorMessage }}</p>
+    <input type="submit" [disabled]="form.invalid">
+  </form>
+  <div actions>
+    <div class="line">
+      <button mat-raised-button color="primary" [disabled]="form.invalid">Sign Up</button>
+    </div>
+    <div class="align-right">
+      You already have an account?
+      <a [routerLink]="['/auth', 'signin']">Signin here</a>
+    </div>
+  </div>
+</app-form-frame>
