@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-signin-page',
-  templateUrl: './signin-page.component.html',
+  template: '<app-signin-form></app-signin-form>',
 })
 export class SigninPageComponent { }

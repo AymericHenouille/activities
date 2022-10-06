@@ -33,7 +33,7 @@ export class SignupFormComponent implements OnInit {
 
   public async signup(): Promise<void> {
     if (this.form.valid) {
-      this.loading = true;
+      this.loader(true);
       try {
         const email: string = this.email;
         const password: string = this.password;
@@ -44,8 +44,14 @@ export class SignupFormComponent implements OnInit {
         console.error(error);
         this.errorMessage = JSON.stringify(error);
       }
-      finally { this.loading = false; }
+      finally { this.loader(false); }
     }
+  }
+
+  private loader(loading: boolean): void {
+    (this.loading = loading)
+      ? this.form.disable()
+      : this.form.enable();
   }
 
   protected visibility(show: boolean): string {

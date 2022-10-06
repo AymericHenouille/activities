@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState, createUserWithEmailAndPassword, Persistence, setPersistence, signInWithEmailAndPassword, User } from '@angular/fire/auth';
+import { Auth, authState, createUserWithEmailAndPassword, Persistence, sendPasswordResetEmail, setPersistence, signInWithEmailAndPassword, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,10 +23,13 @@ export class UserService {
     return createUserWithEmailAndPassword(this.auth, email, password).then();
   }
 
+  public requestPasswordReset(email: string): Promise<void> {
+    return sendPasswordResetEmail(this.auth, email);
+  }
+
   public rememberMe(remember: boolean): Promise<void> {
     const persistence: Persistence = { type: remember ? 'LOCAL' : 'SESSION' };
     return setPersistence(this.auth, persistence);
-
   }
 
 }

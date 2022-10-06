@@ -1,16 +1,16 @@
 <app-form-frame title="create a new account" [loading]="loading">
   <form content [formGroup]="form" (ngSubmit)="signup()">
     <mat-form-field>
-      <input matInput type="email" placeholder="Email" formControlName="email" />
+      <input matInput type="email" placeholder="Email" formControlName="email" autocomplete="email" />
     </mat-form-field>
     <mat-form-field>
-      <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" />
+      <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" autocomplete="new-password" />
       <button type="button" matSuffix mat-icon-button (click)="showPassword = !showPassword">
         <mat-icon>{{ visibility(showPassword) }}</mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password" formControlName="confirmPassword" />
+      <input matInput [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password" formControlName="confirmPassword" autocomplete="new-password" />
       <button type="button" matSuffix mat-icon-button (click)="showConfirmPassword = !showConfirmPassword">
         <mat-icon>{{ visibility(showConfirmPassword) }}</mat-icon>
       </button>
@@ -20,7 +20,7 @@
   </form>
   <div actions>
     <div class="line">
-      <button mat-raised-button color="primary" [disabled]="form.invalid">Sign Up</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="signup()">Sign Up</button>
     </div>
     <div class="align-right">
       You already have an account?

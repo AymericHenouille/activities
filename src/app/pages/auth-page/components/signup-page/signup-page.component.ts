@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-signup-page',
-  templateUrl: './signup-page.component.html'
+  template: '<app-signup-form></app-signup-form>',
 })
 export class SignupPageComponent { }

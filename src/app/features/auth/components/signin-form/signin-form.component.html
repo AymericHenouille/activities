@@ -1,20 +1,20 @@
 <app-form-frame title="login with your account" [loading]="loading">
   <form content [formGroup]="form" (ngSubmit)="signin()">
     <mat-form-field>
-      <input matInput type="email" placeholder="Email" formControlName="email" />
+      <input matInput type="email" placeholder="Email" formControlName="email" autocomplete="email" />
     </mat-form-field>
     <mat-form-field>
-      <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" />
+      <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" autocomplete="current-password" />
       <button type="button" matSuffix mat-icon-button (click)="showPassword = !showPassword">
         <mat-icon>{{ visibility }}</mat-icon>
       </button>
     </mat-form-field>
-    <a [routerLink]="['./']">Forgot password?</a>
+    <a [routerLink]="['/auth', 'forget-password']">Forgot password?</a>
     <input type="submit" [disabled]="form.invalid">
   </form>
   <div actions>
     <div class="line">
-      <button mat-raised-button color="primary" [disabled]="form.invalid">Sign In</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="signin()">Sign In</button>
       <mat-checkbox color="primary" [(ngModel)]="rememberMe">Remember me</mat-checkbox>
     </div>
     <div class="align-right">
